@@ -3,7 +3,8 @@ var path = require("path")
 var cookieParser = require("cookie-parser")
 var logger = require("morgan")
 
-var rootMiddleware = require("./middlewares/index")
+var rootMiddleware = require("./middlewares")
+var authMiddleware = require("./middlewares/auth")
 var usersMiddleware = require("./middlewares/users")
 var todosMiddleware = require("./middlewares/todos")
 
@@ -16,6 +17,7 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, "public")))
 
 app.use("/", rootMiddleware)
+app.use("/auth", authMiddleware)
 app.use("/users", usersMiddleware)
 app.use("/todos", todosMiddleware)
 
