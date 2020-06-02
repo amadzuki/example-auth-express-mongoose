@@ -1,3 +1,4 @@
+### Register new user
 POST http://localhost:3000/auth/register
 Content-Type: application/json
 
@@ -7,8 +8,7 @@ Content-Type: application/json
   "password": "marzuki-password"
 }
 
-###
-
+### Register new user
 POST http://localhost:3000/auth/register
 Content-Type: application/json
 
@@ -16,4 +16,13 @@ Content-Type: application/json
   "name": "Ali Marzuki",
   "email": "ali@example.com",
   "password": "ali-password"
+}
+
+### Login to existing user
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "marzuki@example.com",
+  "password": "marzuki-password"
 }
