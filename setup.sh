@@ -1,1 +1,3 @@
-cp .env.template .env
+if [ ! -f ./.env ]; then
+  cp .env.template .env
+fi
