@@ -30,16 +30,24 @@ yarn start
 | `GET` | `/`      | Show info message        |
 | `GET` | `/hello` | Show hello world message |
 
+### Auth
+
+| Endpoint         | HTTP   | Description               |
+| ---------------- | ------ | ------------------------- |
+| `/auth/register` | `POST` | Register new user         |
+| `/auth/login`    | `POST` | Login to existing user    |
+| `/auth/logout`   | `POST` | Logout the logged in user |
+
 ### Users
 
 | HTTP     | Endpoint     | Description       |
 | -------- | ------------ | ----------------- |
+| `POST`   | `/users`     | Add new user      |
 | `GET`    | `/users`     | Get all users     |
 | `GET`    | `/users/:id` | Get user by id    |
-| `POST`   | `/users`     | Add new user      |
+| `PUT`    | `/users/:id` | Update user by id |
 | `DELETE` | `/users`     | Delete all users  |
 | `DELETE` | `/users/:id` | Delete user by id |
-| `PUT`    | `/users/:id` | Update user by id |
 
 ### Todos
 
