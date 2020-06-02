@@ -1,14 +1,16 @@
-var express = require("express")
-var path = require("path")
-var cookieParser = require("cookie-parser")
-var logger = require("morgan")
+require("dotenv").config()
 
-var rootMiddleware = require("./middlewares")
-var authMiddleware = require("./middlewares/auth")
-var usersMiddleware = require("./middlewares/users")
-var todosMiddleware = require("./middlewares/todos")
+const express = require("express")
+const path = require("path")
+const cookieParser = require("cookie-parser")
+const logger = require("morgan")
 
-var app = express()
+const rootMiddleware = require("./middlewares")
+const authMiddleware = require("./middlewares/auth")
+const usersMiddleware = require("./middlewares/users")
+const todosMiddleware = require("./middlewares/todos")
+
+const app = express()
 
 app.use(logger("dev"))
 app.use(express.json())
