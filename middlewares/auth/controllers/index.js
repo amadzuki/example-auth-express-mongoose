@@ -1,9 +1,9 @@
 const auth = {
   register: require("./register"),
-  // authenticate: require("./authenticate"),
+  authenticate: require("./authenticate"),
   // deauthenticate: require("./deauthenticate"),
   isRegistered: require("./isRegistered"),
-  // isPasswordCorrect: require("./isPasswordCorrect"),
+  isPasswordCorrect: require("./isPasswordCorrect"),
   // isAuthenticated: require("./isAuthenticated"),
   // isAuthorized: require("./isAuthorized"),
 }
