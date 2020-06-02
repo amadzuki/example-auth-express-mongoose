@@ -1,65 +1,36 @@
-const mongoose = require("mongoose")
+const mongoose = require("../../config/mongoose")
 
-const environment = require("../../config/env")
+const AutoIncrement = require("mongoose-sequence")(mongoose)
 
-mongoose.connect(environment.MONGODB_URL, { useNewUrlParser: true })
-
-const User = mongoose.model("user", {
-  id: Number,
-  name: String,
-  username: String,
-  email: String,
-})
-
-let idCounter = 0
-
-User.find()
-  .sort({ id: -1 })
-  .limit(1)
-  .exec(function (error, result) {
-    if (result.length === 0) {
-      console.log("Creating new collection")
-    } else {
-      idCounter = result[0].id
-    }
-  })
-
-module.exports = {
-  find: () => {
-    const users = User.find({}, (error, user) => {})
-    return users
+const UserSchema = mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: [true, "Name is required"],
+      min: [2, "Name is too short"],
+      max: [50, "Name is too long"],
+    },
+    email: {
+      type: String,
+      required: [true, "Email is required"],
+      min: [6, "Email is too short"],
+    },
+    salt: {
+      type: String,
+      required: [true, "Salt is required"],
+    },
+    hash: {
+      type: String,
+      required: [true, "Hash is required"],
+    },
   },
+  {
+    timestamps: true,
+  }
+)
 
-  findById: (id) => {
-    const user = User.findOne({ id: id }, (error, user) => {})
-    return user
-  },
+UserSchema.plugin(AutoIncrement, { inc_field: "id" })
 
-  create: (newUser) => {
-    idCounter++
-    const addUser = new User({
-      id: idCounter,
-      ...newUser,
-    })
-    addUser.save().then(() => console.log("Successfully add new user"))
-  },
+const User = mongoose.model("User", UserSchema)
 
-  updateNameById: async (id, newName) => {
-    const updatedUser = await User.findOneAndUpdate(
-      { id: id },
-      { $set: { name: newName } },
-      { new: true }
-    )
-    return updatedUser
-  },
-
-  deleteAll: async () => {
-    const deleteLog = await User.deleteMany({})
-    return deleteLog
-  },
-
-  deleteById: async (id) => {
-    const deleteLog = await User.deleteOne({ id: id })
-    return deleteLog
-  },
-}
+module.exports = User
