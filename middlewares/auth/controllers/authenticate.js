@@ -1,5 +1,4 @@
-const jsonwebtoken = require("jsonwebtoken")
-const { uuid } = require("uuidv4")
+const jwt = require("jsonwebtoken")
 
 const authenticate = async (req, res) => {
   const payload = {
@@ -8,7 +7,7 @@ const authenticate = async (req, res) => {
     email: req.user.email,
   }
 
-  const accessToken = jsonwebtoken.sign(payload, process.env.SECRET, {
+  const accessToken = jwt.sign(payload, process.env.SECRET, {
     expiresIn: "2 days",
   })
 
